@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { Form } from './components/Form';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className="container">
+      <div className="jumbotron">
+        <h1 class="display-4">Buscador de imágenes Pixabay</h1>
+        <p className="lead">
+          Puedes encontrar una variedad de imágenes de uso libre
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <hr class="my-2" />
+        <Form />
+      </div>
     </div>
   );
 }
