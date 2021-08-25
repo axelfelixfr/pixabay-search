@@ -1,5 +1,10 @@
 import React from 'react';
 
 export const Error = ({ message }) => {
-  return <p className="my-3 p-4 text-center alert alert-primary">{message}</p>;
+  return (
+    <div className="alert alert-dismissible alert-primary">
+      <h4 className="alert-heading">Espera!</h4>
+      <p className="mb-0">{message}</p>
+    </div>
+  );
 };

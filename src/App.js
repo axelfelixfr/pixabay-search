@@ -1,15 +1,35 @@
+import { useEffect, useState } from 'react';
 import { Form } from './components/Form';
 
 function App() {
+  // State de la app
+  const [searchImages, setSearchImages] = useState('');
+
+  useEffect(() => {
+    const consultAPI = async () => {
+      if (searchImages === '') return;
+      const imagesForPage = 30;
+      const apiKey = process.env.REACT_APP_PIXABAY_KEY;
+      const url = `https://pixabay.com/api/?key=${apiKey}&q=${searchImages}&per_page=${imagesForPage}`;
+
+      const respuesta = await fetch(url);
+      const resultado = await respuesta.json();
+
+      console.log(resultado);
+    };
+
+    consultAPI();
+  }, [searchImages]);
+
   return (
     <div className="container">
       <div className="jumbotron">
-        <h1 class="display-4">Buscador de imágenes Pixabay</h1>
+        <h1 className="display-4">Buscador de imágenes Pixabay</h1>
         <p className="lead">
           Puedes encontrar una variedad de imágenes de uso libre
         </p>
-        <hr class="my-2" />
-        <Form />
+        <hr className="my-2" />
+        <Form setSearchImages={setSearchImages} />
       </div>
     </div>
   );
