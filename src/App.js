@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Form } from './components/Form';
+import { ListImages } from './components/ListImages';
 
 function App() {
   // State de la app
   const [searchImages, setSearchImages] = useState('');
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const consultAPI = async () => {
@@ -13,9 +15,9 @@ function App() {
       const url = `https://pixabay.com/api/?key=${apiKey}&q=${searchImages}&per_page=${imagesForPage}`;
 
       const respuesta = await fetch(url);
-      const resultado = await respuesta.json();
+      const { hits } = await respuesta.json();
 
-      console.log(resultado);
+      setImages(hits);
     };
 
     consultAPI();
@@ -30,6 +32,10 @@ function App() {
         </p>
         <hr className="my-2" />
         <Form setSearchImages={setSearchImages} />
+      </div>
+
+      <div className="row justify-content-center">
+        <ListImages images={images} />
       </div>
     </div>
   );
